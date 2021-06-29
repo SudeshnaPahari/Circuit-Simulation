@@ -1,0 +1,20 @@
+* c:\users\hp\esim-workspace\cmosasaninverter\cmosasaninverter.cir
+
+.lib "sky130_fd_pr/models/sky130.lib.spice" tt
+xm2 net-_m2-pad1_ in out net-_m2-pad1_ sky130_fd_pr__pfet_01v8 
+xm1 out in gnd gnd sky130_fd_pr__nfet_01v8 
+v1  in gnd pwl(0 0 10 0 11 5 20 5)
+v2 net-_m2-pad1_ gnd  dc 5
+* u2  out plot_v1
+* u1  in plot_v1
+.tran 0.1e-00 20e-00 0e-00
+
+* Control Statements 
+.control
+run
+print allv > plot_data_v.txt
+print alli > plot_data_i.txt
+plot v(out)
+plot v(in)
+.endc
+.end
